@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { TabComponent } from './tab.component';\nexport const routes = [{\n  path: '',\n  pathMatch: 'full',\n  component: TabComponent\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { SidePanelComponent } from './side-panel.component';\nexport const routes = [{\n  path: '',\n  pathMatch: 'full',\n  component: SidePanelComponent\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
