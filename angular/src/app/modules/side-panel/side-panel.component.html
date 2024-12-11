@@ -1,12 +1,12 @@
 <div class="side-panel">
-    <header>
-      <h1>Side Panel</h1>
-      <p>You opened the side panel!</p>
-    </header>
-  
-    <!-- Authentication Component -->
-    <section>
-      <app-authentication></app-authentication>
-    </section>
-  </div>
-  
+  <ng-container *ngIf="!isAuthenticated; else chatScreen">
+    <!-- Authentication Screen -->
+    <app-authentication (authStatus)="handleAuthenticationStatus($event)"></app-authentication>
+  </ng-container>
+  <ng-template #chatScreen>
+    <!-- Chat Screen -->
+    <div class="chat-container">
+      <app-chat-screen></app-chat-screen>
+    </div>
+  </ng-template>
+</div>

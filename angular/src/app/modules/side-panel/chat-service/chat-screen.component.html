@@ -1,0 +1,21 @@
+<div class="chat-container">
+  <!-- Scrollable chat messages box -->
+  <div class="messages" #scrollContainer>
+    <div *ngFor="let message of messages" class="message">
+      <span class="timestamp">{{ message.createdAt.toDate() | date: 'shortTime' }}</span>
+      <strong class="username">{{ message.id }}:</strong>
+      <span class="text">{{ message.text }}</span>
+    </div>
+  </div>
+
+  <!-- Fixed input box -->
+  <div class="input-container">
+    <input
+      type="text"
+      placeholder="Type a message..."
+      [(ngModel)]="newMessage"
+      (keyup.enter)="sendMessage()"
+    />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>

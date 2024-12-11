@@ -1,6 +1,5 @@
 // environment.ts
 export const environment = {
-    production: false,
     firebaseConfig: {
         apiKey: "AIzaSyAAW_VUOWqlP_PX0pn9ADM6NR4umUN10UI",
         authDomain: "extension-bf8bc.firebaseapp.com",
