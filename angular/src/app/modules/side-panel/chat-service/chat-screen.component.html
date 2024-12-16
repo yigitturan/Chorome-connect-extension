@@ -1,21 +1,49 @@
 <div class="chat-container">
-  <!-- Scrollable chat messages box -->
-  <div class="messages" #scrollContainer>
-    <div *ngFor="let message of messages" class="message">
-      <span class="timestamp">{{ message.createdAt.toDate() | date: 'shortTime' }}</span>
-      <strong class="username">{{ message.id }}:</strong>
-      <span class="text">{{ message.text }}</span>
-    </div>
+  <div #scrollContainer class="messages">
+    @for (message of messages; track message) {
+      <div
+        class="message"
+        [ngClass]="{
+          sent: message.username === currentUsername,
+          received: message.username !== currentUsername
+        }"
+      >
+        @if (message.username !== currentUsername) {
+          <span
+            class="username"
+            [style.color]="getUsernameColor(message.username)"
+          >
+            {{ message.username }}
+          </span>
+        }
+        @if (message.text) {
+          <div class="text">{{ message.text }}</div>
+        }
+        @if (message.photoUrl) {
+          <img class="photo" [src]="message.photoUrl" alt="Sent photo" />
+        }
+        <span class="timestamp">{{ formatTimestamp(message.createdAt) }}</span>
+      </div>
+    }
   </div>
-
-  <!-- Fixed input box -->
-  <div class="input-container">
+  <div class="chat-input">
     <input
-      type="text"
-      placeholder="Type a message..."
       [(ngModel)]="newMessage"
-      (keyup.enter)="sendMessage()"
+      type="text"
+      placeholder="Type your message..."
+      (keydown.enter)="sendMessage()"
     />
-    <button (click)="sendMessage()">Send</button>
+    <button (click)="sendMessage()" [disabled]="isSending || !newMessage.trim()">Send</button>
+    <button (click)="startCamera()" [disabled]="isCapturingPhoto">Open Camera</button>
   </div>
+  @if (isCapturingPhoto) {
+    <div class="webcam-container">
+      <video #video autoplay playsinline></video>
+      <div class="camera-controls">
+        <button (click)="capturePhoto()">Capture Photo</button>
+        <button (click)="sendPhoto()" [disabled]="!capturedPhotoBlob">Send Photo</button>
+        <button (click)="stopCamera()">Stop Camera</button>
+      </div>
+    </div>
+  }
 </div>

@@ -1,12 +1,20 @@
-<div class="side-panel">
-  <ng-container *ngIf="!isAuthenticated; else chatScreen">
-    <!-- Authentication Screen -->
-    <app-authentication (authStatus)="handleAuthenticationStatus($event)"></app-authentication>
-  </ng-container>
-  <ng-template #chatScreen>
-    <!-- Chat Screen -->
-    <div class="chat-container">
-      <app-chat-screen></app-chat-screen>
-    </div>
-  </ng-template>
-</div>
+@if (!isAuthenticated) {
+  <app-authentication
+    (authStatus)="handleAuthenticationStatus($event)"
+  ></app-authentication>
+} @else {
+  <!-- Progress Bar -->
+  @if (isLoading) {
+    <mat-progress-bar
+      mode="indeterminate"
+      color="primary"
+      class="loading-bar"
+    ></mat-progress-bar>
+  }
+
+  <!-- Chat Screen -->
+  <app-chat-screen
+    [currentUsername]="authenticatedUsername"
+    (loadingState)="handleLoadingState($event)"
+  ></app-chat-screen>
+}
