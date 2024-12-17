@@ -47,10 +47,14 @@ run npm run start
 ## IMPORTANT SUB-STEP
 You must change the serviceworker.js file in the dist folder to match the one in the extra file for project to work. Just copy and paste the serviceworker.js file
 
-Then go to: chrome://extensions in the browser and enable 'developer mode' in the top right
+Then go to: chrome://extensions in the browser and enable 'developer mode' in the top right.
+
 press Load unpacked in the top left at chrome://extensions and choose the folder angular/dist
+
 click the reload button next to the new angular extension to make sure it is updated.
+
 The extension name will be "Angular Chrome Extension"
+
 The project is automatically being watched, any changes to the files will recompile the project.
 
 NOTE: changes to the content page and service worker scripts requires you to reload the extension in chrome://extensions
