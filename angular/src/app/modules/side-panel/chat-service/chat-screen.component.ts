@@ -143,15 +143,14 @@ export class ChatScreenComponent implements AfterViewInit {
 
   async startCamera() {
     if (this.isCapturingPhoto) {
-      return; // Prevent multiple initializations
+      return;
     }
 
     try {
-      // Stop any existing stream
       await this.stopCamera();
       
       this.isCapturingPhoto = true;
-      this.cdr.detectChanges(); // Ensure template is updated before accessing video element
+      this.cdr.detectChanges();
       
       const stream = await navigator.mediaDevices.getUserMedia({ 
         video: { 
@@ -165,7 +164,7 @@ export class ChatScreenComponent implements AfterViewInit {
       
       if (video) {
         video.srcObject = stream;
-        await video.play(); // Wait for video to start playing
+        await video.play();
       }
     } catch (error) {
       console.error('Error starting camera:', error);
@@ -183,7 +182,6 @@ export class ChatScreenComponent implements AfterViewInit {
     }
 
     try {
-      // Ensure video has valid dimensions
       await new Promise(resolve => setTimeout(resolve, 100));
 
       const canvas = document.createElement('canvas');
@@ -205,6 +203,8 @@ export class ChatScreenComponent implements AfterViewInit {
         throw new Error('Failed to capture photo.');
       }
 
+      // Automatically send the photo after capturing
+      await this.sendPhoto();
       await this.stopCamera();
       this.cdr.detectChanges();
     } catch (error) {
