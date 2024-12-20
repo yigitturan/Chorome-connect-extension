@@ -26,6 +26,7 @@
       </div>
     }
   </div>
+
   <div class="chat-input">
     <input
       [(ngModel)]="newMessage"
@@ -36,13 +37,13 @@
     <button (click)="sendMessage()" [disabled]="isSending || !newMessage.trim()">Send</button>
     <button (click)="startCamera()" [disabled]="isCapturingPhoto">Open Camera</button>
   </div>
+
   @if (isCapturingPhoto) {
     <div class="webcam-container">
       <video #video autoplay playsinline></video>
       <div class="camera-controls">
-        <button (click)="capturePhoto()">Capture Photo</button>
-        <button (click)="sendPhoto()" [disabled]="!capturedPhotoBlob">Send Photo</button>
-        <button (click)="stopCamera()">Stop Camera</button>
+        <button (click)="capturePhoto()">Take Photo</button>
+        <button (click)="stopCamera()">Cancel</button>
       </div>
     </div>
   }
